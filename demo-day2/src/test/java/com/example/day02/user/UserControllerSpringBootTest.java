@@ -15,11 +15,14 @@ class UserControllerSpringBootTest {
 
     @Test
     public void case_success() {
+        UserResponse expected = new UserResponse(1, "somkiat", 30);
         UserResponse result
                 = restTemplate.getForObject("/user/1", UserResponse.class);
         assertEquals(1, result.getId());
         assertEquals("somkiat", result.getFirstname());
         assertEquals(30, result.getAge());
+
+        assertEquals(expected, result);
 
     }
 
