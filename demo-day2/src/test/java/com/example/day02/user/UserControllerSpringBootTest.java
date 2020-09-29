@@ -13,8 +13,15 @@ class UserControllerSpringBootTest {
     @Autowired
     TestRestTemplate restTemplate;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Test
     public void case_success() {
+        // Insert data for test
+        MyUser somkiat = new MyUser(1, "somkiat", 30);
+        userRepository.save(somkiat);
+
         UserResponse expected = new UserResponse(1, "somkiat", 30);
         UserResponse result
                 = restTemplate.getForObject("/user/1", UserResponse.class);

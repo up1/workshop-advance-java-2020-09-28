@@ -1,14 +1,25 @@
 package com.example.day02.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
     public UserDomain get(int id) {
+        Optional<MyUser> result = userRepository.findById(id);
+        if (!result.isPresent()) {
+            throw new RuntimeException("User not found with id=" + id);
+        }
         UserDomain userDomain = new UserDomain();
-        userDomain.setId(id);
-        userDomain.setFirstname("somkiat");
-        userDomain.setAge(30);
+        userDomain.setId(result.get().getId());
+        userDomain.setFirstname(result.get().getFirstname());
+        userDomain.setAge(result.get().getAge());
         return userDomain;
     }
 }
