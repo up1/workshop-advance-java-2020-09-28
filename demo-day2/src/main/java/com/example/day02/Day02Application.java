@@ -2,7 +2,10 @@ package com.example.day02;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import static java.lang.System.out;
 
@@ -19,6 +22,11 @@ public class Day02Application {
 		out.println("Count=" + context.getBeanDefinitionCount());
 
         //mvnw spring-boot:run
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplateBuilder().build();
     }
 
 }
