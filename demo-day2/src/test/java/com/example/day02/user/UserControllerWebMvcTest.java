@@ -22,7 +22,7 @@ class UserControllerWebMvcTest {
         MvcResult mvcResult = mvc.perform(get("/user/1"))
                 .andExpect(status().isOk())
                 .andReturn();
-        
+
         String response = mvcResult.getResponse().getContentAsString();
         ObjectMapper mapper = new ObjectMapper();
         UserResponse result = mapper.readValue(response, UserResponse.class);
